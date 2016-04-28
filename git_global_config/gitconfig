@@ -1,0 +1,42 @@
+[user]
+    name = Adrian Garcia
+    email = adrian@garciaprado.es
+[core]
+    editor = vim
+[color]
+    modified = blue
+    ui = true
+[color "status"]
+    added = green
+    changed = cyan
+[alias]
+    aa = add --all
+    ba = branch -ra
+    bd = branch -d
+    bv = branch -vv
+    ca = commit --amend
+    cb = checkout -b
+    cm = commit -a --amend -C HEAD
+    ci = commit -a -v
+    co = checkout
+    di = diff
+    l = git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
+    ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    mm = merge --no-ff
+    st = status --short --branch
+    tg = tag -a
+    pu = push --tags
+    un = reset --hard HEAD
+    uh = reset --hard HEAD^
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[branch]
+    autosetuprebase = always
+[push]
+    default = simple
+[http]
+    sslverify = false
