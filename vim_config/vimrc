@@ -5,7 +5,7 @@
 "              on this file is still a good idea.
 
 "------------------------------------------------------------
-" Features {{{1
+" Features
 "
 " These options and commands enable some very useful features in Vim, that
 " no user should have to live without.
@@ -13,6 +13,41 @@
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
 set nocompatible
+
+"------------------------------------------------------------
+" Plugins
+"
+" Now set up Vundle in your .vimrc by adding the following to the top of the file:
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugin
+call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'                 " Plugin Manager
+Plugin 'tmhedberg/SimpylFold'              " Code Folding
+Plugin 'vim-scripts/indentpython.vim'      " Python indentation
+Plugin 'scrooloose/syntastic'              " Syntax Checking/Higlighting
+Plugin 'nvie/vim-flake8'                   " PEP8 checking
+Plugin 'scrooloose/nerdtree'               " File Browsing
+Plugin 'jistr/vim-nerdtree-tabs'           "
+Plugin 'kien/ctrlp.vim'                    " Improved search
+
+Plugin 'jnurmine/Zenburn'                  " Color Schemes
+Plugin 'altercation/vim-colors-solarized'  "
+Plugin 'tomasr/molokai'
+
+Plugin 'Valloric/YouCompleteMe'            " Auto-complete
+
+" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
@@ -26,7 +61,7 @@ syntax on
 set background=dark
 
 "------------------------------------------------------------
-" Must have options {{{1
+" Must have options
 "
 " These are highly recommended options.
 
@@ -68,7 +103,7 @@ set hlsearch
 
 
 "------------------------------------------------------------
-" Usability options {{{1
+" Usability options
 "
 " These are options that users frequently set in their .vimrc. Some of them
 " change Vim's behaviour in ways which deviate from the true Vi way, but
@@ -114,7 +149,7 @@ set t_vb=
 set mouse=a
 
 " Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
+""press <Enter> to continue"
 set cmdheight=2
 
 " Display line numbers on the left
@@ -126,9 +161,12 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
+" colorscheme
+colorscheme molokai
+
 
 "------------------------------------------------------------
-" Indentation options {{{1
+" Indentation options
 "
 " Indentation settings according to personal preference.
 
@@ -140,12 +178,12 @@ set expandtab
 
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
-set shiftwidth=4
-set tabstop=4
+"set shiftwidth=4
+"set tabstop=4
 
 
 "------------------------------------------------------------
-" Mappings {{{1
+" Mappings
 "
 " Useful mappings
 
@@ -158,3 +196,75 @@ set tabstop=4
 "nnoremap <C-L> :nohl<CR><C-L>
 
 "------------------------------------------------------------
+" IDE options
+"
+" Split panes
+set splitbelow
+set splitright
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+"------------------------------------------------------------
+" Python Indentation
+"
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" JavaScript, HTML, CSS and YAML indentation
+au BufNewFile,BufRead *.js, *.html, *.css, *.yml
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+"-----------------------------------------------------------
+" Python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+"-----------------------------------------------------------
+" Let Python highlight everything
+let python_highlight_all=1
+
+"-----------------------------------------------------------
+" NERDTreeIgnore 
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+"-----------------------------------------------------------
+" Flagging Unnecessary Whitespace
+" We also want to avoid extraneous whitespace. We can have VIM flag that for us
+" so that it’s easy to spot – and then remove.
+
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+"-----------------------------------------------------------
+" UTF8 Support
+set encoding=utf-8
+
+"-----------------------------------------------------------
+" Auto complete customizations
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
