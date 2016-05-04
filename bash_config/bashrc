@@ -22,13 +22,31 @@
 #   1.  ENVIRONMENT CONFIGURATION
 #   -------------------------------
 
+#   Git branch in PS1
+#   - Instalation instructions
+#
+#     - Create 'bash' diretory
+#       $ mkdir -p $UNIX_CONFIG_FILES_PWD/bash_config/bash
+#       $ ln -s $UNIX_CONFIG_FILES_PWD/bash_config/bash $HOME/.bash
+#
+#     - Clone repository:
+#       $ git clone https://github.com/jimeh/git-aware-prompt.git ~/.bash
+#
+#     - Enjoy
+#
+#   ------------------------------------------------------------
+export GITAWAREPROMPT=~/.bash/git-aware-prompt
+source "${GITAWAREPROMPT}/main.sh"
+
 #   Create variable with OS: Linux or Darwin(MacOS)
 #   ------------------------------------------------------------
 export OS="$(uname)"
 
 #   Change Prompt
 #   ------------------------------------------------------------
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+#export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \[\033[33;1m\]\w\[\033[m\] :\n\$ "
+#export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h\[\033[m\]: \[\033[33;1m\]\w\[\033[m\]: \$git_branch:\n\$ "
+export PS1="\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] @ \[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;3m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;117m\]\$git_branch\[$(tput sgr0)\]:\n\$ "
 
 #   Add color to terminal
 #   (this is all commented out as I use Mac Terminal Profiles)
