@@ -4,3 +4,6 @@
 [submodule "vim_config/vim_runtime"]
 	path = vim_config/vim_runtime
 	url = https://github.com/amix/vimrc.git
+[submodule "bash_config/bash/git-aware-prompt"]
+	path = bash_config/bash/git-aware-prompt
+	url = https://github.com/jimeh/git-aware-prompt.git
