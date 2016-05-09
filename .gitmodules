@@ -1,3 +1,6 @@
 [submodule "vim_config/vim/bundle/YouCompleteMe"]
 	path = vim_config/vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "vim_config/vim_runtime"]
+	path = vim_config/vim_runtime
+	url = https://github.com/amix/vimrc.git
